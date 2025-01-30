@@ -1,5 +1,8 @@
 const User = require("../models/userModule");
 const CustomError = require("../utils/customError");
+const { genarateAccessToken, genaraterefreshToken } = require("../utils/generateToken");
+
+//register Service
 
 exports.registerUserSarvice = async ({ username, email, password }) => {
   const existingUser = await User.findOne({ email });
@@ -26,4 +29,48 @@ exports.registerUserSarvice = async ({ username, email, password }) => {
       500
     );
   }
+};
+
+// Login Service
+
+exports.loginUserService = async ({ email, password }) => {
+  const user = await User.findOne({ email });
+
+  if (!user) throw new CustomError("Invalid email or password", 401);
+
+  if (user.isBlocked) {
+    throw new CustomError(
+      "❌ Your account is blocked. Please contact Admin for assistance. 📞",
+      403
+    );
+  }
+
+  // Validate password
+
+  const isMatch = await user.matchPassword(password);
+  if (!isMatch) {
+    throw new CustomError(
+      "🚫 Invalid email or password. Double-check and try again. 🛠️",
+      401
+    );
+  }
+
+  // Generate tokens
+
+  const accessToken = genarateAccessToken({
+    id: user._id,
+    role: user.role,
+    email: user.email,
+  });
+  const refreshToken = genaraterefreshToken({
+    id: user._id,
+    role: user.role,
+    email: user.email,
+  });
+
+  return {
+    accessToken,
+    refreshToken,
+    user: { username: user.username, email: user.email, role: user.role },
+  };
 };
