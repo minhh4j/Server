@@ -4,7 +4,7 @@ const userRoutes = require('./routes/userRoutes');
 const connectDb = require('./config/db');
 const express = require('express');
 const errorHandler = require('./middlewares/errorHandler');
-
+const productsRoutes = require('./routes/productsRoutes')
 const app = express();
 
 
