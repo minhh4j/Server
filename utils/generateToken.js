@@ -10,7 +10,7 @@ const genarateAccessToken = (user) => {
             role:user.role
         },
         process.env.JWT_SECRET,
-        { expiresIn: '5m' }
+        { expiresIn: '3d' }
     )
 }
 

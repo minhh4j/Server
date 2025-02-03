@@ -41,7 +41,7 @@ exports.loginUser = asyncHandler(async (req, res) => {
   res.cookie("accessToken", accessToken, {
     httpOnly: true,
     secure: true,
-    maxAge: 5 * 60 * 1000, // 5 minutes (in milliseconds)
+    maxAge: 3 * 24 * 60 * 60 * 1000, // 5 minutes (in milliseconds)
     path: "/",
     sameSite: "none",
   });
