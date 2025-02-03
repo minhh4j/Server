@@ -37,7 +37,7 @@ const productSchema = new mongoose.Schema(
       required: [true, "Product description is required"],
     },
     ingredients: {
-      type: String,
+      type: [String],
       required: true,
     },
     isDeleted: {

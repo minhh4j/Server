@@ -18,9 +18,9 @@ exports.registerUserSarvice = async ({ username, email, password }) => {
     };
   } catch (error) {
     if (error.code === 11000) {
-      const field = Object.keys(err.keyPattern)[0];
+      const field = Object.keys(error.keyPattern)[0];
       throw new CustomError(
-        `The ${field} "${err.keyValue[field]}" is already taken. Please use a different one.`,
+        `The ${field} "${error.keyValue[field]}" is already taken. Please use a different one.`,
         400
       );
     }

@@ -6,6 +6,7 @@ const express = require('express');
 const errorHandler = require('./middlewares/errorHandler');
 const productsRoutes = require('./routes/productsRoutes')
 const cartRoutes = require('./routes/cartRoutes')
+const OrderRoutes = require('./routes/orderRoutes')
 const app = express();
 
 
@@ -20,6 +21,7 @@ connectDb();
 app.use('/api', userRoutes);
 app.use('/api',productsRoutes)
 app.use('/api/user',cartRoutes)
+app.use('/api/user' , OrderRoutes)
 
 
 app.use(errorHandler)
