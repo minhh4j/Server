@@ -7,6 +7,7 @@ const errorHandler = require('./middlewares/errorHandler');
 const productsRoutes = require('./routes/productsRoutes')
 const cartRoutes = require('./routes/cartRoutes')
 const OrderRoutes = require('./routes/orderRoutes')
+const wishlistRoutes = require('./routes/wishlistRoutes')
 const app = express();
 
 
@@ -18,10 +19,11 @@ app.use(cookieParser());
 connectDb();
 
 
-app.use('/api', userRoutes);
+app.use('/api', userRoutes)
 app.use('/api',productsRoutes)
 app.use('/api/user',cartRoutes)
 app.use('/api/user' , OrderRoutes)
+app.use('/api/user', wishlistRoutes)
 
 
 app.use(errorHandler)

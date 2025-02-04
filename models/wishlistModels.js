@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+
 const whishlistSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.ObjectId, ref: "User", required: true },
   items: [
@@ -14,4 +15,4 @@ const whishlistSchema = new mongoose.Schema({
 });
 
 const Whishlist = mongoose.model("Whishlist", whishlistSchema);
-module.exports = whishlistSchema;
+module.exports = Whishlist;

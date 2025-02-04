@@ -1,21 +1,4 @@
-// const errorHandler = require("../middlewares/errorHandler");
-// const cartService = require('../services/cartServices')
-
-// //add product
-
-// const addProductToCart = errorHandler( async ( req , res ) => {
-//     const userId = req.user._id ;
-//     const {productId} = req.params; 
-
-//     const cart = await cartService.addToCart(userId, productId);
-//     res.status(200).json({ message: 'Product added to cart', cart });
-// })
-
-
-// module.exports = {addProductToCart}
-
 const asyncHandler = require("../middlewares/asyncHandler");
-const errorHandler = require("../middlewares/errorHandler");
 const cartService = require('../services/cartServices');
 
 // Add product to cart
@@ -27,7 +10,7 @@ const addProductToCart = async (req, res, next) => {
         const cart = await cartService.addToCart(userId, productId);
         res.status(200).json({ message: 'Product added to cart', cart });
     } catch (error) {
-        next(error);  // Pass the error to the error handler
+        next(error); 
     }
 };
 
