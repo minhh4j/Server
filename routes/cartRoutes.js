@@ -1,13 +1,13 @@
 const express = require('express');
-const authMiddlewares = require('../middlewares/authMiddlewares')
+const {authMiddleware} = require('../middlewares/authMiddlewares')
 const cartController = require('../controllers/cartControllers');
 const router = express.Router()
 
-router.post('/cart/:productId', authMiddlewares,cartController.addProductToCart )
-router.get('/cart' , authMiddlewares , cartController.getCartDeatails)
-router.delete('/cart/:productId', authMiddlewares , cartController.deleteProductFromCart)
-router.put('/cart/:productId/increase' , authMiddlewares , cartController.increaseCartQuantity)
-router.put('/cart/:productId/decrease' , authMiddlewares , cartController.decreaseCartQuantity)
+router.post('/cart/:productId', authMiddleware,cartController.addProductToCart )
+router.get('/cart' , authMiddleware , cartController.getCartDeatails)
+router.delete('/cart/:productId', authMiddleware , cartController.deleteProductFromCart)
+router.put('/cart/:productId/increase' , authMiddleware , cartController.increaseCartQuantity)
+router.put('/cart/:productId/decrease' , authMiddleware , cartController.decreaseCartQuantity)
 
 module.exports = router ;
 

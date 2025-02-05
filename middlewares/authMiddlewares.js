@@ -42,4 +42,13 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
-module.exports = authMiddleware ; 
+const isAdmin = (req , res , next ) => {
+  if(req.user && req.user.role === "admin"){
+    next();
+  }
+  else{
+    throw new CustomError('Access denied, only admins can access this', 403)
+  }
+}
+
+module.exports = {authMiddleware , isAdmin} ; 

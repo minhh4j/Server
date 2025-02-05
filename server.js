@@ -18,13 +18,15 @@ app.use(cookieParser());
 
 connectDb();
 
-
+// User
 app.use('/api', userRoutes)
 app.use('/api',productsRoutes)
 app.use('/api/user',cartRoutes)
 app.use('/api/user' , OrderRoutes)
 app.use('/api/user', wishlistRoutes)
 
+//Admin
+app.use('/api/admin' , productsRoutes)
 
 app.use(errorHandler)
 

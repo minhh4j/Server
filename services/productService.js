@@ -49,3 +49,48 @@ exports.getProductService = async ({ id, page, limit, name, category }) => {
 };
 
 
+// add product 
+
+exports.addProducts = async (productData) => {
+  const existingProduct = await Product.findOne({name:productData.name})
+  if(existingProduct){
+   throw new Error("Product already exists");
+  }
+  const product = await Product.create(productData)
+  return product
+}
+
+// delete product 
+
+exports.deleteProduct = async(productId) => {
+  const product = await Product.findByIdAndUpdate(
+    productId, 
+    {isDeleted:true},
+    {new : true }
+  )
+  if(!product){
+    throw new CustomError('Product is not fount' , 404)
+  }
+  return product ;
+}
+
+
+
+// edit product 
+
+exports.updateProducts = async (productId,updateData) => {
+  console.log(productId);
+  console.log(updateData);
+  
+  const product = await Product.findOneAndUpdate(
+    { _id: productId, isDeleted: false},
+    { $set: { ...updateData } },
+    { new: true }
+  );
+  console.log(product);
+  
+  if(!product){
+    throw new CustomError('Product is not fount' , 404)
+  }
+  return product ;
+}
